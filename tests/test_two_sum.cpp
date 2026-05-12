@@ -4,24 +4,20 @@
 #include "helper/helper.h"
 
 using std::vector;
-using std::random_device;
-using std::mt19937;
-using std::uniform_int_distribution;
-
 
 TEST(TwoSum, BinarySearch) {
     int n_tests = 100;
-    random_device device;
-    mt19937 generator(device());
+    std::random_device device;
+    std::mt19937 generator(device());
     int thresh = 1e9;
-    uniform_int_distribution<> num_dist(-thresh, thresh);
-    uniform_int_distribution<> size_dist(2, 1e4);
+    std::uniform_int_distribution<> num_dist(-thresh, thresh);
+    std::uniform_int_distribution<> size_dist(2, 1e4);
     vector<int> nums;
     vector<int> indices;
     for (int i = 0; i < n_tests; i++) {
         int n_list = size_dist(generator);
         int count = 0;
-        uniform_int_distribution<> list_dist(0, n_list - 1);
+        std::uniform_int_distribution<> list_dist(0, n_list - 1);
 
         nums.resize(n_list);
         indices.resize(n_list);
