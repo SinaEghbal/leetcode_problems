@@ -14,7 +14,7 @@ FetchContent_Declare(
 
 FetchContent_MakeAvailable(googletest)
 
-file(GLOB SOLUTIONS_SRCS src/solutions/*.cpp)
+file(GLOB SOLUTIONS_SRCS src/solutions/*.cpp src/utils/*.cpp)
 message("Included sources: ${SOLUTIONS_SRCS}")
 add_library(solutions ${SOLUTIONS_SRCS})
 
