@@ -34,3 +34,22 @@ void test_function(FnT fn, std::vector<OutputT> expected, ArgsT... args) {
             return ss.str();
         }();
 }
+
+template<typename FnT, typename OutputT, typename... ArgsT>
+void test_function_any_order(FnT fn, std::vector<OutputT> expected, ArgsT... args) {
+    std::vector<OutputT> result = fn(args...);
+    std::vector<OutputT> result_sorted(result);
+    sort(result_sorted.begin(), result_sorted.end());
+    std::vector<OutputT> expected_sorted(expected);
+    sort(expected_sorted.begin(), expected_sorted.end());
+
+    EXPECT_EQ(result_sorted, expected_sorted)
+        << [&]() {
+            std::stringstream ss;
+            ss << "Test failed!\narguments: ";
+            ((ss << testing::PrintToString(args) << ", "), ...);
+            ss << "\nExpected: " << testing::PrintToString(expected)
+                << "\nGot: " << testing::PrintToString(result);
+            return ss.str();
+        }();
+}
